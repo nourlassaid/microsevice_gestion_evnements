@@ -27,7 +27,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonarquabe') {
+                withSonarQubeEnv('SonarQube') {
                     bat '"C:\Users\MSAR\Desktop\sonar-scanner-5.0.1.3006-windows\bin" 
                 }
             }
