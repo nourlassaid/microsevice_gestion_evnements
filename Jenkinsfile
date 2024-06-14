@@ -1,44 +1,60 @@
 pipeline {
     agent any
+
     environment {
-        SONARQUBE_TOKEN = 'sqp_cb42562016837fc8c43b443c3c59c4537be00158'
-        SONARQUBE_HOST = 'http://localhost:9000'
+        DOCKER_PATH = "C:\\Programmes\\Docker\\cli-plugins"
+        PATH = "${DOCKER_PATH}:${PATH}"
+       
+        NODEJS_PATH = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Node.js"
+        SONAR_SCANNER_HOME = "C:\\Users\\MSAR\\Desktop\\sonar-scanner-5.0.1.3006-windows"
     }
+
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                script {
+                    checkout scm
+                }
+            }
+        }
+        stage('Install Dependencies and Run Tests') {
+            steps {
+                script {
+                    bat 'npm install'
+                    //bat 'npm test --detectOpenHandles'
+                }
             }
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    bat '''
-                        sonar-scanner.bat ^
-                        -Dsonar.projectKey=microservice_evnement ^
-                        -Dsonar.projectName=microservice_evnement ^
-                        -Dsonar.projectVersion=4.0 ^
-                        -Dsonar.sources=. ^
-                        -Dsonar.host.url=%SONARQUBE_HOST% ^
-                        -Dsonar.login=%SONARQUBE_TOKEN%
-                    '''
+                withSonarQubeEnv('sonarquabe') {
+                    bat '"C:\\Users\\MSAR\\Desktop\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner" -Dsonar.projectKey=PLANIFICATION-SERVICE'
                 }
             }
         }
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t nour0/evnement_kubernetes:latest .'
+                script {
+                    // Construire l'image Docker avec élévation de privilèges
+                    bat 'docker build -t our0/evnement_kubernetes:latest .'
+                }
             }
         }
-        stage('Push Docker Image') {
+        stage('Tag Docker Image') {
             steps {
-                bat 'docker push nour0/evnement_kubernetes:latest'
+                script {
+                    bat "docker tag evnement_kubernetes:latest nour0/evnement_kubernetes:latest"
+                }
             }
         }
-        stage('Deploy to Kubernetes') {
+        stage('Publish Docker Image') {
             steps {
-                bat 'kubectl apply -f eve-deployment.yaml'
-                bat 'kubectl apply -f backend-service.yaml'
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        bat 'docker login'
+                        bat 'docker push our0/evnement_kubernetes:latest'
+                    }
+                }
             }
         }
     }
