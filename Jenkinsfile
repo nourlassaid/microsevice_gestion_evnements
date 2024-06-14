@@ -13,32 +13,32 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        sonar-scanner \
+                    bat '''
+                        sonar-scanner.bat \
                         -Dsonar.projectKey=microservice_evnement \
                         -Dsonar.projectName=microservice_evnement \
                         -Dsonar.projectVersion=4.0 \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=${SONARQUBE_HOST} \
-                        -Dsonar.login=${SONARQUBE_TOKEN}
+                        -Dsonar.host.url=%SONARQUBE_HOST% \
+                        -Dsonar.login=%SONARQUBE_TOKEN%
                     '''
                 }
             }
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t nour0/evnement_kubernetes:latest .'
+                bat 'docker build -t nour0/evnement_kubernetes:latest .'
             }
         }
         stage('Push Docker Image') {
             steps {
-                sh 'docker push nour0/evnement_kubernetes:latest'
+                bat 'docker push nour0/evnement_kubernetes:latest'
             }
         }
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f eve-deployment.yaml'
-                sh 'kubectl apply -f backend-service.yaml'
+                bat 'kubectl apply -f eve-deployment.yaml'
+                bat 'kubectl apply -f backend-service.yaml'
             }
         }
     }
