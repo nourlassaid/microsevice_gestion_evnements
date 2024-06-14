@@ -28,7 +28,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarquabe') {
-                    bat '"C:\\Users\\MSAR\\Desktop\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner" -Dsonar.projectKey=PLANIFICATION-SERVICE'
+                    bat '"C:\Users\MSAR\Desktop\sonar-scanner-5.0.1.3006-windows\bin" 
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     // Construire l'image Docker avec élévation de privilèges
-                    bat 'docker build -t our0/evnement_kubernetes:latest .'
+                    bat 'docker build -t nour0/evnement_kubernetes:latest .'
                 }
             }
         }
@@ -52,7 +52,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                         bat 'docker login'
-                        bat 'docker push our0/evnement_kubernetes:latest'
+                        bat 'docker push nour0/evnement_kubernetes:latest'
                     }
                 }
             }
