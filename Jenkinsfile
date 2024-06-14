@@ -14,12 +14,12 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     bat '''
-                        sonar-scanner.bat \
-                        -Dsonar.projectKey=microservice_evnement \
-                        -Dsonar.projectName=microservice_evnement \
-                        -Dsonar.projectVersion=4.0 \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=%SONARQUBE_HOST% \
+                        sonar-scanner.bat ^
+                        -Dsonar.projectKey=microservice_evnement ^
+                        -Dsonar.projectName=microservice_evnement ^
+                        -Dsonar.projectVersion=4.0 ^
+                        -Dsonar.sources=. ^
+                        -Dsonar.host.url=%SONARQUBE_HOST% ^
                         -Dsonar.login=%SONARQUBE_TOKEN%
                     '''
                 }
