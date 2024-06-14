@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: events
+
+data:
+  formation_management.sql: |
+    -- phpMyAdmin SQL Dump
+    -- version 5.2.1
+    -- https://www.phpmyadmin.net/
+    --
+    -- Hôte : 127.0.0.1
+    -- Généré le : mer. 22 mai 2024 à 11:07
+    -- Version du serveur : 8.0.36
+    -- Version de PHP : 8.0.30
+
+    SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+    START TRANSACTION;
+    SET time_zone = "+00:00";
+
+    --
+    -- Base de données : `formation_management`
+    --
+
+    -- Structure de la table `events`
+    --
+
+    CREATE TABLE `events` (
+      `id` int NOT NULL,
+      `title` varchar(255) NOT NULL,
+      `description` text,
+      `date` date DEFAULT NULL,
+      `time` time DEFAULT NULL,
+      `location` varchar(255) DEFAULT NULL,
+      `category` varchar(50) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+    --
+    -- Déchargement des données de la table `events`
+    --
+
+    INSERT INTO `events` (`id`, `title`, `description`, `date`, `time`, `location`, `category`) VALUES
+    (2, 'hac', 'Description de l\'événement', '2024-05-15', '18:00:00', 'Lieu de l\'événement', 'Catégorie de l\'événement'),
+    (3, 'Titre de l\'événement', 'Description de l\'événement', '2024-05-15', '18:00:00', 'Lieu de l\'événement', 'Catégorie de l\'événement'),
+    (5, 'd', 's', '2024-05-16', NULL, 's', 's'),
+    (6, 'ttt', 'ttt', '2024-05-30', '12:00:00', 'tozeur', 'hac'),
+    (7, 'ttt', 'ttt', '2024-05-30', '12:00:00', 'tozeur', 'hac'),
+    (8, 'ttt', 'ss', '2024-05-05', NULL, 'tozeur', 'hac'),
+    (9, 'ttt', 'ss', '2024-05-05', NULL, 'tozeur', 'hac'),
+    (10, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (11, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (12, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (13, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (14, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (15, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (16, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (17, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (18, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (19, 'ttt', 'qq', '2024-05-04', NULL, 'tozeur', 'hac'),
+    (20, 'ttt', 'x', '2024-05-25', NULL, 'tozeur', 'hac'),
+    (21, 'ttt', 'tyy', '2024-05-30', '12:05:00', 'tozeur', 'ô'),
+    (22, 'ttt', 'tyy', '2024-05-30', '12:05:00', 'tozeur', 'ô'),
+    (23, 'ttt', 'tyy', '2024-05-30', '12:05:00', 'tozeur', 'ô'),
+    (24, 'ttt', 'tyy', '2024-05-30', '12:05:00', 'tozeur', 'ô'),
+    (25, 'ttt', 'ggg', '2024-06-04', NULL, 'tozeur', 'ô'),
+    (26, 'ttt', 'ggg', '2024-06-04', NULL, 'tozeur', 'ô'),
+    (27, 'ttt', 'ggg', '2024-06-04', NULL, 'tozeur', 'ô'),
+    (28, 'ttt', 'fff', '2024-06-07', NULL, 'tozeur', 'ô'),
+    (29, 'ttt', 'lll', '2024-05-02', '14:01:00', 'tozeur', 'p'),
+    (30, 'ttt', 'lll', '2024-05-02', '14:01:00', 'tozeur', 'p'),
+    (31, 'ttt', 'lll', '2024-05-02', '14:01:00', 'tozeur', 'p'),
+    (32, 'ttt', 'lll', '2024-05-02', '14:01:00', 'tozeur', 'p'),
+    (33, 'ttt', 'lll', '2024-05-02', '14:01:00', 'tozeur', 'p'),
+    (34, 'ttt', 'dd', '2024-06-09', NULL, 'i', 'i'),
+    (35, 'mmm', 'i', '2024-05-03', NULL, 'i', 'i'),
+    (36, 'mmm', 'i', '2024-05-03', NULL, 'i', 'i'),
+    (37, 'mmm', 'i', '2024-05-03', NULL, 'i', 'i'),
+    (38, 'w', 'ww', '2024-06-01', NULL, 'o', 'i');
+            -- --------------------------------------------------------
+           --
+          -- Index pour la table `events`
+          --
+           ALTER TABLE `events`
+               ADD PRIMARY KEY (`id`);
+              -
+         -- AUTO_INCREMENT pour la table `events`
+               --
+          ALTER TABLE `events`
+            MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;

@@ -1,0 +1,25 @@
+{
+  "name": "gestion-evenements-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "sonar": "sonar-scanner"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.9",
+    "prom-client": "^15.1.2",
+    "sequelize": "^6.37.3"
+  },
+  "keywords": [],
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sonar-scanner": "^3.1.0",
+    "supertest": "^7.0.0"
+  }
+}
